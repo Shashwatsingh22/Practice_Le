@@ -1,1 +1,1 @@
-/first->next->next->next->next->next=first->next->next;
+ ptr->ne

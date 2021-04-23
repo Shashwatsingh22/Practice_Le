@@ -4,93 +4,74 @@ using namespace std;
 class Node
 {
     public:
+    Node *back;
     int data;
-    Node* next;
+    Node *next;
 };
 
-Node *head=NULL;
+Node *first=NULL;
 
-void creat_cll(int A[],int n)
+void create_dll(int A[],int n)
 {
-    head=new Node;
-    head->data=A[0];
-    head->next=head;
+     first=new Node;
+     first->back=NULL;
+     first->data=A[0];
+     first->next=NULL;
 
-    Node* current=head;
+     Node *current_ptr=first;
 
-    for(int i=1;i<n;i++)
-    {
-       Node *temp=new Node;
-       temp->data=A[i];
-       current->next=temp;
-       current=temp;
-       temp->next=head;
-    }
+     for(int i=1;i<n;i++)
+     {
+         Node *temp=new Node;
+         temp->data=A[i];
 
+         temp->back=current_ptr;
+         temp->next=NULL;
+         current_ptr->next=temp;
+         current_ptr=temp;
+     }
 }
 
-/*void display()
+
+void Reverse_Doubly_LL(Node *ptr)
 {
-   Node *ptr=head;
-   do
-   {
-    cout<<ptr->data<<"->";
-    ptr=ptr->next;
-   }
-   while(ptr!=head);
-}*/
-
-void recuDisplay(Node *ptr)
-{
-    static int flag=0;
-    if(ptr!=head || flag==0)
+    while (ptr!=NULL)
     {
-      flag=1;
-      cout<<ptr->data<<"->";
-      recuDisplay(ptr->next);
-    }
+        Node *temp=ptr->next;
+        
+        ptr->next=ptr->back;
+        ptr->back=temp;
 
-    flag=0;
-}
+        ptr=ptr->back;
 
-int del_in_cll(int pos)
-{
-    int x=-1;
-    if(pos==1)
-    {
-         Node *ptr=head;
-         while(ptr->next!=head)
-         {
-           ptr=ptr->next;
-         }
-         Node *q=head;
-         head=head->next;
-         ptr->next=head;
-         x=q->data;
-         delete(q);
-    }
-
-    else
-    {
-        Node* ptr=head;
-        for (int i = 0; i < pos-2; i++)
+        if(ptr!=NULL && ptr->next==NULL)
         {
-            ptr=ptr->next;
+            first=ptr;
         }
-        Node *q=ptr->next;
-        ptr->next=q->next;
-        x=q->data;
-        delete(q);
     }
-    return x;
+}
+
+
+void Display()
+{
+   Node *ptr=first;
+   while(ptr)
+   {
+       cout<<"<-"<<ptr->data<<"->";
+       ptr=ptr->next;
+   }
+   cout<<endl;
 }
 
 
 int main()
 {
     int A[]={1,2,3,4,5};
-    creat_cll(A,sizeof(A)/sizeof(A[0]));
-    recuDisplay(head);
-    cout<<endl<<del_in_cll(3)<<endl;
-    recuDisplay(head);
+    int n;
+    n= sizeof(A)/sizeof(A[0]);
+    create_dll(A,n);
+    Display();
+
+    Reverse_Doubly_LL(first);
+    Display();
 }
