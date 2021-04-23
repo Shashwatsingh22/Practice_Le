@@ -19,22 +19,15 @@ void merge(int A[],int n,int B[],int n1,int C[])
         {
             C[k++]=B[j++];
         }
-    }
-    if(i<n)
+      }
+    for(;i<n;i++)
     {
-        for(;i<n;i++)
-        {
-            C[k++]=A[i];
-        }
+        C[k++]=A[i];
     }
-    else
-    {
-        for(;j<n1;j++)
+  for(;j<n1;j++)
         {
             C[k++]=B[j];
         }
-    }
-
 }
 
 void Display(int A[],int n)
