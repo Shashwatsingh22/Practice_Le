@@ -13,15 +13,6 @@ int main()
     
     int num;
     cin>>num;
-    if(num>0)
-    {
-        currentSum+=num;
-        if(currentSum>MaxSum)
-        {
-            MaxSum=currentSum;
-        }
-    }
-    size-=1;
     
     while(size--)
     {
@@ -30,6 +21,10 @@ int main()
       if(currentSum>MaxSum)
         {
             MaxSum=currentSum;
+        }
+        if(currentSum<0)
+        {
+            currentSum=0;
         }
     }
 

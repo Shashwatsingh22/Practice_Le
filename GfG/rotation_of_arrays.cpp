@@ -79,7 +79,7 @@ void Rotate_by_right_by_array(int A[],int k,int n)
    }
 }
 
-void by_trick_for_left_revrse_ka_revrse_is_correct(int A[],int k,int n)
+void by_trick_for_left_revrse_ka_revrse_is_correct(int A[],int k,int n) //For Right Rotation
 {
   int i=0;
   int j=n-k-1;
@@ -120,6 +120,14 @@ int main()
    cin>>k;
    int n=sizeof(A)/sizeof(A[0]);
    Display(A,n);
-   by_trick_for_left_revrse_ka_revrse_is_correct(A,k,n);
+   cout<<"By the Extra Array Rotation : ";
+   Rotate_by_right_by_array(A,k,n);
    Display(A,n);
+
+   int B[]={1,2,3,4,5,6};
+   int n1=sizeof(B)/sizeof(B[0]);
+   Display(B,n1);
+   cout<<"By trick of Right";
+   by_trick_for_left_revrse_ka_revrse_is_correct(B,k,n1);
+   Display(B,n1);
 }
