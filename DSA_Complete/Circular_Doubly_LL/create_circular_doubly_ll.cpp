@@ -33,7 +33,7 @@ void create_c_dll(int A[],int n)
 }
 
 
-Display(Node *ptr)
+void Display(Node *ptr)
 {
     do
     {
@@ -42,7 +42,7 @@ Display(Node *ptr)
     }while(ptr!=head);
 }
 
-Display1(Node *ptr)
+void Display1(Node *ptr)
 {
     int flag=0;
     while(ptr!=head || flag==0)
@@ -53,7 +53,7 @@ Display1(Node *ptr)
     }
 }
 
-Display2(Node *ptr)
+void Display2(Node *ptr)
 {
     static int flag=0;
     if(ptr!=head || flag==0)
