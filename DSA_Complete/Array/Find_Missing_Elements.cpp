@@ -69,7 +69,18 @@ cout<<missing_element<<endl;
    }
 }
 
-
+int multiple_element_missing(int A[],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(A[i]-i!=A[0])
+        {
+            cout<<A[0]+i<<" ";
+            n=InsertMissingElement(A,n,A[0]+i);
+        }
+    }
+    return n;
+}
 
 void Display(int A[],int n)
 {
@@ -82,10 +93,13 @@ void Display(int A[],int n)
 
 int main()
 {
-    int A[10]={1,2,3,4,5,7,8,9,10};
-    int len=9;
+    //int A[10]={1,2,3,4,5,7,8,9,10};
+    int A[11]={10,12,13,15,16,18,20};
+    int len=7;
     Display(A,len);
     //len=find_single_element_from_the_sorted_array_of_n_natural_num(A,len,10);
-    len=find_single_element_from_natural_num_but_starting_from_random_place(A,len);
+    //len=find_single_element_from_natural_num_but_starting_from_random_place(A,len);
+    len=multiple_element_missing(A,len);
+    cout<<endl;
     Display(A,len);
 }
