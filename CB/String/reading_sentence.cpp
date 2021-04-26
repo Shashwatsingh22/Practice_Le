@@ -23,7 +23,7 @@ int main()
 {
     int len;
    cin>>len;
-   //char A[100];
+   char A[100];
    //readline(A,len,'\n');
    
    /*
