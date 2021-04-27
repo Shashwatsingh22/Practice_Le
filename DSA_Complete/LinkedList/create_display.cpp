@@ -6,9 +6,8 @@ struct Node
    int data;
    struct Node *next;
 };
-struct Node *first=NULL;
 
-void Creat_LL(int A[],int n)
+struct Node *Creat_LL(struct Node *first,int A[],int n)
 {
    //Last Pointer Will Help me to join any new element at the last;
    //temp ptr help me to build the next node
@@ -27,6 +26,7 @@ void Creat_LL(int A[],int n)
         last->next=temp;
         last=temp;
     }
+    return first;
 }
 
 void Display_LL(struct Node *ptr)
@@ -41,8 +41,9 @@ void Display_LL(struct Node *ptr)
 
 int main()
 {
+    struct Node *first=NULL;
     int A[]={1,2,3,4,5,6};
     //cout<<sizeof(A)/sizeof(A[0]);
-    Creat_LL(A,sizeof(A)/sizeof(A[0]));
+    first=Creat_LL(first,A,sizeof(A)/sizeof(A[0]));
     Display_LL(first);
 }

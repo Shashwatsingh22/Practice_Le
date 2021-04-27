@@ -1,1 +1,2 @@
- ptr->ne
+
+int display_ll(Node *ptr)
