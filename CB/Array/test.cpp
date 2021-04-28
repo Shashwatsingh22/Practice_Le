@@ -29,14 +29,13 @@ bool isDiv(int key)
    return false;
 }
 
-int changeToInt(char st)
+int changeToInt(string st)
 {
-  string s(1,st);
   int num=0;
   int p=1;
-  for(int i=s.length()-1;i>=0;i--)
+  for(int i=st.length()-1;i>=0;i--)
   {
-	  num+=(s[i]+'0')*p;
+	  num+=(st[i]+'0')*p;
 	  p*=10;
   }
   return num;
@@ -50,17 +49,21 @@ int main() {
 
 	cin>>st;
 
+string s;
 	for(int i=0;i<n;i++)
 	{
-		string s;
-		s.append(string(s[i]));
-		for(int j=i+1;j<n;j++)
+		
+		s+=st[i];
+		if(isDiv(changeToInt(s)))
 		{
-			s.append(string(st[j]));
-			cout<<s<<endl;
+			count++;
+		}
+		else if(isPresent(changeToInt(s)))
+		{
+			count++;
 		}
 	}
-
+    cout<<count<<endl;
     
 	
 	return 0;
