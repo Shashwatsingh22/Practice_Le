@@ -6,5 +6,6 @@
         "string": "cpp",
         "vector": "cpp",
         "type_traits": "cpp"
-    }
+    },
+    "python.pythonPath": "C:\\Users\\Shashwat\\anaconda3\\python.exe"
 }
