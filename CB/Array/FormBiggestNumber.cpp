@@ -20,7 +20,6 @@ bool compare(string A,string B)
 {
     int numA=changeToInt(A+B);
 	int numB=changeToInt(B+A);
-	cout<<numA<<" "<<numB<<endl;
 	return numA<numB;
 }
 
@@ -32,15 +31,26 @@ int main() {
 	{
 		int size;
 		cin>>size;
+
 		string A[size];
 		for(int i=0;i<size;i++)
 		{
 			cin>>A[i];
 		}
-		sort(A,A+size,compare);
+		
 		for(int i=0;i<size;i++)
 		{
-		cout<<A[i]<<" ";
+		 for(int j=i;j<size;j++)
+		 {
+            if(compare(A[i],A[j]))
+			{  
+				swap(A[i],A[j]);
+			}
+		 }
+		}
+		for(int i=0;i<size;i++)
+		{
+			cout<<A[i];
 		}
 	}
 
