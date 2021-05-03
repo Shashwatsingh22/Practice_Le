@@ -39,25 +39,8 @@ void display(node *ptr)
     cout<<endl;
 }
 
-void reverse_by_copy_array(node *ptr)
-{
-    vector<int> v;
-    while(ptr)
-    { 
-        v.push_back(ptr->data);
-        ptr=ptr->next;
-    }
-    ptr=first;
-    int i=v.size()-1;
-    while(ptr)
-    {
-        ptr->data=v[i];
-        ptr=ptr->next;
-        i--;
-    }
-}
 
-void ReverseWithoutUsingExtraSpace(node *front)
+node *ReverseWithoutUsingExtraSpace(node *front)
 {
     node *mid=NULL;
     node *last=NULL;
@@ -70,20 +53,34 @@ void ReverseWithoutUsingExtraSpace(node *front)
 
         mid->next=last;
     }
-    first=mid;
+    return mid;
 }
 
-void ReverseByRecursion(node *tail,node *head)
+void revrseMain(node *head,int k)
 {
-    if(head)
+    node *fir=head;
+    node *sec=head;
+
+    node *ptr=NULL;
+    for(int i=0;i<k;i++)
     {
-        ReverseByRecursion(head,head->next);
-        head->next=tail;
+     ptr=sec;
+     sec=sec->next;
     }
-    else
+    ptr->next=NULL;
+    
+    fir=ReverseWithoutUsingExtraSpace(fir);
+    //display(fir);
+    sec=ReverseWithoutUsingExtraSpace(sec);
+    //display(sec);
+
+    ptr=fir;
+    while(ptr->next!=NULL)
     {
-    first=tail;
+      ptr=ptr->next;
     }
+    ptr->next=sec;
+    first=fir;
 }
 
 void revrse(node *back, node *forward)
@@ -102,16 +99,13 @@ void revrse(node *back, node *forward)
 
 int main()
 {
-    int a[]={1,2,3,4,5,6,7,8,9,10};
+    //int a[]={1,2,3,4,5,6,7,8,9,10};
+    int a[]={5 ,9 ,9 ,3 ,5 ,6 ,6 ,2 ,8 ,2};
     int size=sizeof(a)/sizeof(a[0]);
 
     create_ll(a,size);
     display(first);
 
-    //reverse_by_copy_array(first);
-    //ReverseWithoutUsingExtraSpace(first);
-    // ReverseByRecursion(NULL,first);
-    //first=
-    revrse(NULL,first);
-    display(first);
+    revrseMain(first,2);
+    display(first);  
 }
