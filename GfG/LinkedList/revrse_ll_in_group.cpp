@@ -61,33 +61,43 @@ node *ReverseWithoutUsingExtraSpace(node *front,node *end)
 node *revrseMain(node *head,int k)
 {
       node *ptr=head;
-      node *qtr=NULL;
-      node *prev=NULL;  
+      node *prev=NULL;
+      node *curr=NULL;
+
+      for(int i=0;i<k-1;i++)
+      {
+        head=head->next;
+      }
+      
+      //display(head);
+
       while(ptr)
       {
          node *start=ptr;
          node *end=ptr;
-         node *q=ptr;
-
+         
          for(int i=0;i<k;i++)
          {
              ptr=ptr->next;
-             q=q->next;
          }
+         
          end=ptr;
-         prev=ReverseWithoutUsingExtraSpace(start,end);
-         while(prev->next!=NULL)
+
+         curr=ReverseWithoutUsingExtraSpace(start,end);
+         
+         prev=curr;
+         if(prev!=NULL)
          {
-             prev=prev->next;
+         
+            prev->next=curr;
+         
          }
-         qtr=ptr;
-         for(int i=0;i<k;i++)
-         {
-             qtr=qtr->next;
-         }
-         prev->next=qtr;
+         //prev=ReverseWithoutUsingExtraSpace(start,end);
+         
+         display(prev);
       }
-   return qtr;
+   display(head);
+   return head;
 }
 
 int main()

@@ -29,18 +29,6 @@ void create_ll(int A[], int n)
 //   current->next=first->next;
 }
 
-/*void display(Node *ptr)
-{
-   do
-   {
-       cout<<ptr->data<<" ";
-       ptr=ptr->next;
-   }
-   while(ptr!=NULL);
-   
-   cout<<endl;
-}*/
-
 bool isLoop()
 {
   Node *head=first;
@@ -64,6 +52,7 @@ bool isLoop()
    
    if(head==tail)
    {
+      cout<<tail->data<<endl;
        return true;
    }
    else
@@ -75,14 +64,14 @@ bool isLoop()
 
 int main()
 {
-    //int A[]={1,2,3,4,5};
-    int A[]={1};
+    int A[]={1,2,3,4,5};
+    //int A[]={1};
     create_ll(A,sizeof(A)/sizeof(A[0]));
     Node *t1,*t2;
 
-    //t1=first->next->next;
-    //t2=first->next->next->next->next;
-    //t2->next=t1;
+    t1=first->next->next;
+    t2=first->next->next->next->next;
+    t2->next=t1;
 
     if(isLoop())
     cout<<"Yes"<<endl;
