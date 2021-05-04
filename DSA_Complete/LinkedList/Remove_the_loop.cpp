@@ -38,16 +38,26 @@ void Display(Node *ptr)
     cout<<endl;
 }
 
-void RemoveLoop(Node *ptr,Node *qtr)
-{
-   while(ptr->next!=qtr->next)
-   {
-       ptr=ptr->next;
-       qtr=qtr->next;
-   }
-   qtr->next=NULL;
-   
-}
+ void removeLoop(Node *first,Node *ptr)
+    {
+        if(first==ptr)
+        {
+            //int flag=0;
+            while(ptr->next!=first)
+            {
+             ptr=ptr->next;   
+            }
+        }
+        else
+        {
+            while(first->next!=ptr->next)
+            {
+                first=first->next;
+                ptr=ptr->next;
+            }
+        }
+        ptr->next=NULL;
+    }
 
 bool isLoop()
 {
@@ -72,7 +82,7 @@ bool isLoop()
    
    if(head==tail)
    {
-      RemoveLoop(first,tail);
+      removeLoop(first,tail);
       return true;
    }
    else
