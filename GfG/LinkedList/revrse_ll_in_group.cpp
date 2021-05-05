@@ -97,7 +97,7 @@ node *revrseMain(node *head,int k)
          display(prev);
       }
    display(head);
-   return head;
+  // return head;
 }
 
 int main()
@@ -110,5 +110,5 @@ int main()
     display(first);
 
     first=revrseMain(first,2);
-    display(first);  
+   // display(first);  
 }
