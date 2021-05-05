@@ -42,11 +42,7 @@ void Display(Node *ptr)
     {
         if(first==ptr)
         {
-            
-            while(ptr->next!=first)
-            {
-             ptr=ptr->next;   
-            }
+           cout<<first->data<<endl;      
         }
         else
         {
@@ -55,8 +51,9 @@ void Display(Node *ptr)
                 first=first->next;
                 ptr=ptr->next;
             }
+            cout<<ptr->next->data<<endl;
         }
-        cout<<ptr->next->data<<endl;
+        
     }
 
 bool Loop()
@@ -100,9 +97,16 @@ int main()
     create_ll(A,sizeof(A)/sizeof(A[0]));
     Node *t1,*t2;
 
-    t1=first->next->next;
+    t1=first;
     t2=first->next->next->next->next;
     t2->next=t1;
 
-    Loop();
+    if(Loop())
+    {
+      cout<<"Yes Have Loop !!"<<endl;
+    }
+    else
+    {
+        cout<<"No Loop"<<endl;
+    }
 }
