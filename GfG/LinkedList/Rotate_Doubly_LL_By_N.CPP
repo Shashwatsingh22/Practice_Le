@@ -84,7 +84,7 @@ int main()
   head=createDLL(head,A,n);
   
   Display(head);
-  int N=3;
+  int N=1;
   head=ReverseByN(head,N);
   Display(head);
 
