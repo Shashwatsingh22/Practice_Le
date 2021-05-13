@@ -41,11 +41,11 @@ int dequeue(queue  *ptr)
 void Display(queue ptr)
 {
     int i=ptr.first+1;
-    while(i<=ptr.rear && i!=ptr.first)
+    do
     {
       cout<<ptr.Arr[i]<<" ";
       i=(i+1)%ptr.size;
-    }
+    }while(i!=(ptr.rear+1)%ptr.size);
     cout<<endl;
 }
 
