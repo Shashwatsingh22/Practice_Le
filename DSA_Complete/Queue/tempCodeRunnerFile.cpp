@@ -1,1 +1,1 @@
-   cout<<"OverFlow"<<endl;
+  ptr=ptr->next

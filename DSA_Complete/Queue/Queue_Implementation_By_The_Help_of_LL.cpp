@@ -20,15 +20,16 @@ void enqueue(int d)
    else
    {
        temp->data=d;
-       temp->next=NULL;
 
        if(first==NULL){
            first=rear=temp;
+           rear->next=NULL;
        }
        else
        {
            rear->next=temp;
            rear=temp;
+           rear->next=NULL;
        }
    }
 }
