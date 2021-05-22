@@ -11,26 +11,22 @@ int findSqRoot(int n)
     while(first<=last)
     {
       int mid=(first+last)/2;
-      if(mid*mid<=n)
+      if(mid*mid==n)
       {
-        if(ans==mid)
-        {
-            flag--;
-            if(flag)
-            {
-                break;
-            }
-        }  
+          return mid;
+      }
+      if(mid*mid<n)
+      {  
         ans=mid;
-        first=mid;   
+        first=mid+1;   
       }
       else if(mid*mid>n)
       {
-          last=mid;
+          last=mid-1;
       }
       else
       {
-         first=mid;
+         first=mid+1;
       }
     }
     return ans;
