@@ -1,12 +1,12 @@
 #include<iostream>
 using namespace std;
 
-int findSqRoot(int n)
+float findSqRoot(int n,int placeValue)
 {
     int first=0;
     int last=n;
     
-    int ans=0;
+    float ans=0;
     int flag=1;
     while(first<=last)
     {
@@ -29,12 +29,29 @@ int findSqRoot(int n)
          first=mid+1;
       }
     }
+    
+    //Now Here If we Wants to Return the the Value in form of the Floating point then
+    //Then We can here use the bruteforce approch 10==> 3.162 ==> then 1> 3.1^2<=10 2> 3.16^2<=10
+    
+    float st=0.1;
+    for(int i=0;i<placeValue;i++)
+    {
+        while(ans*ans<=n)
+        {
+            ans+=st;
+        }
+        ans-=st;
+        st/=10;
+    }
+   
     return ans;
+
 }
 
 int main()
 {
-    int num;
+    int num,placeV;
     cin>>num;
-    cout<<findSqRoot(num);
+    cin>>placeV;
+    cout<<findSqRoot(num,placeV);
 }
