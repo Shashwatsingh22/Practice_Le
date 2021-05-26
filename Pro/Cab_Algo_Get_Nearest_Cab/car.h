@@ -1,25 +1,32 @@
-#include<math.h>
-#include<string.h>
-
 class car{
-    string name_driver;
+    char name_driver;
     int posX,posY;
 
     public:
-    car(string name,int x,int y)
+    car(char name,int x,int y)
     {
-       name_drive=name;
+       name_driver=name;
        posX=x;
        posY=y;
     }
     
+    int getPosX() const
+    {
+        return posX;
+    }
+    
+    int getPosY() const
+    {
+        return posY;
+    }
+
+    char getDriverName() const
+    {
+        return name_driver;
+    }
+
     int distance(int userX,int userY)
     {
        return (posX*posX-userX*userX)+(posY*posY-userY*userY);
-    }
-
-    void display(int userX,int userY)
-    {
-        cout<<"Driver_Name : "<<name_driver<<"  Distance : "<<distance(userX,userY)<<" Coordinates : "<<posX<<","<<posY<<endl;
     }
 };
