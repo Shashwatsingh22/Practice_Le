@@ -90,8 +90,6 @@ Node *dequeue(Node *ptr)
 
 int main()
 {
-   Node *Q1,*Q2,*Q3;
-   
    while(true)
    {
      char choice;
@@ -110,18 +108,14 @@ int main()
         switch(pri)
         {
         case 1:
-            {
-             cout<<pri<<endl;
-             enqueue(p,pri);
-            }
+            enqueue(p,pri);
             break;
         case 2:
             enqueue(p,pri);
             break;
         case 3:
             enqueue(p,pri);
-            break;
-        
+            break;    
         default:
             cout<<"Unsupported Priority"<<endl;
             break;
