@@ -110,5 +110,5 @@ int main()
     display(first);
 
     first=revrseMain(first,2);
-   // display(first);  
+   display(first);  
 }
