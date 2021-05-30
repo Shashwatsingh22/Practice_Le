@@ -66,75 +66,25 @@ bool isEmpty()
     return first==NULL;
 }
 
-void lchild(Node *temp,char data)
+void preorder(Node *ptr)
 {
-    Node *ptr=new Node;
-    if(ptr==NULL)
+    if(ptr!=NULL)
     {
-        cout<<"Overflow"<<endl;
-    }
-    else
-    {
-        ptr->data=data;
-        ptr->lchild=ptr->rchild=NULL;
-        enqueue(ptr);
-        temp->lchild=ptr;
+        cout<<ptr->data<<" ";
+        preorder(ptr->lchild);
+        preorder(ptr->rchild);
     }
 }
 
-void rchild(Node *temp,char data)
+void QDisplay()
 {
-    Node *ptr=new Node;
-    if(ptr==NULL)
+    Queue *ptr = first;
+    while(ptr!=NULL)
     {
-        cout<<"Overflow"<<endl;
+        cout<<ptr->data<<" ";
+        ptr=ptr->next;
     }
-    else
-    {
-        ptr->data=data;
-        ptr->lchild=ptr->rchild=NULL;
-        enqueue(ptr);
-        temp->rchild=ptr;
-    }
-}
-
-
-void CreatTree(char data,char side)
-{
-    Node *temp=new Node;
-    if(temp==NULL)
-    {
-       cout<<" Overflow "<<endl;
-    }
-    else
-    { 
-        temp->data=data;
-        temp->lchild=temp->rchild=NULL;
-
-        if(root==NULL)
-        {
-            root=temp;
-            enqueue(temp);
-        }
-        else
-        {
-            Node *t=dequeue();
-            if(child_Complete!=0)
-            {
-                enqueue(t);
-            }
-
-            if(side == 'L')
-            {
-                lchild(t,data);
-            }
-            else if(side == 'R')
-            {
-                rchild(t,data);
-            }
-        }
-
-    }
+    cout<<endl;
 }
 
 int main()
@@ -147,15 +97,85 @@ int main()
     cin>>ch;
     if(ch=='Y')
     {
-        cout<<"Enter the Data: ";
-        cin>>data;
-        cout<<"Enter At which Side: ";
-        cin>>side;
-        CreatTree(data,side);
+        if(root==NULL)
+        {
+            Node *temp=new Node;
+            if(temp==NULL)
+            {
+                cout<<"OverFlow";
+                return 0;
+            }
+            else
+            {
+                cout<<"Enter The Data For the Root Node : ";
+                cin>>temp->data;
+                temp->lchild=temp->rchild=NULL;
+                root=temp;
+                enqueue(temp);
+                cout<<"Queue Updata: ";
+                QDisplay();
+            }    
+        }
+        else
+        {
+            Node *t=dequeue();
+            char ch;
+            cout<<"Do you want to enter the Data at the Lside (of "<< t->data << "): (Y/N): ";
+            cin>>ch;
+
+            //Left Child Insertion
+            if(ch=='Y')
+            {
+               Node *temp=new Node;
+               if(temp==NULL)
+               {
+                   cout<<"Overflow"<<endl;
+                   return 0;
+               }
+               else{
+               cout<<"Enter the Left Child Data: (of "<< t->data <<") ";
+               cin>>temp->data;
+               temp->lchild=temp->rchild=NULL;
+               t->lchild=temp;
+               enqueue(temp);
+               cout<<"Queue Update: ";
+               QDisplay();
+               }
+            }
+           
+            //Right Child Insertion
+            cout<<"Do you wants to enter the Data at the Rside: ( of "<< t->data <<") (Y/N): ";
+            cin>>ch;
+            if(ch=='Y')
+            {
+              Node *temp =new Node;
+              if(temp==NULL)
+              {
+                  cout<<"Overflow"<<endl;
+                  return 0;
+              }
+              else
+              {
+               cout<<"Enter the Right Child Data: (of "<< t->data <<") ";
+               cin>>temp->data;
+               temp->lchild=temp->rchild=NULL;
+               t->rchild=temp;
+               enqueue(temp);
+               cout<<"Queue Update: ";
+               QDisplay();
+              }
+            }
+
+        }
+
     }
     else if(ch == 'N')
     {
         break;
     }
   }
+
+  cout<<"PreOrder Of This Tree"<<endl;
+  preorder(root);
+  return 0;
 }
