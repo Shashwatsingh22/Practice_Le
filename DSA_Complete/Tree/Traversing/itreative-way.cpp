@@ -58,6 +58,11 @@ treeNode *Dequeue()
     return retAdd;
 }
 
+bool isEmptyQueue()
+{
+    return first==NULL;
+}
+
 class Stack
 {
     public:
@@ -104,7 +109,7 @@ treeNode *pop()
     return retAdd;
 }
 
-/*void preOrder(treeNode *ptr)
+void PreOrder(treeNode *ptr)
 {
     if(ptr==NULL)
     {
@@ -116,7 +121,7 @@ treeNode *pop()
         {
             if(ptr!=NULL)
             {
-                cout<<ptr->data;
+                cout<<ptr->data<<" ";
                 push(ptr);
                 ptr=ptr->lChild;
             }
@@ -127,9 +132,10 @@ treeNode *pop()
             }
         }
     }
-}*/
+    cout<<endl;
+}
 
-void PreOrder(treeNode *t)
+void InOrder(treeNode *t)
 {
     if(t==NULL)
     {
@@ -137,99 +143,150 @@ void PreOrder(treeNode *t)
     }
     else
     {
-        cout<<t->data<<" ";
-        PreOrder(t->lChild);
-        PreOrder(t->rChild);
+        while(t!=NULL || isEmptyStack())
+        {
+            if(t!=NULL)
+            {
+                push(t);
+                t=t->lChild;
+            }
+            else
+            {
+                t=pop();
+                cout<<t->data<<" ";
+                t=t->rChild;
+            }
+        }
     }
+    cout<<endl;
 }
 
-/*void InOrder(Node *ptr)
+/*void PostOrder(treeNode *t)
 {
-    if([ptr==NULL])
+    int convert;
+    if(t==NULL)
     {
         return;
     }
     else
     {
-        stack st;
-        while(ptr!=NULL || isEmpty(st)!=true)
+        while(t!=NULL || isEmptyStack())
         {
-            if(ptr!=NULL)
+            if(t!=NULL)
             {
-                push(&st,ptr);
-                ptr=ptr->lchild;
+                convert=(int)t;
+                push(-1*convert);
+                t=t->lChild;
             }
             else
             {
-                ptr=pop(&st);
-                cout<<ptr->data<<" ";
-                ptr=ptr->rchild;
+               convert=pop();
+               if(convert<0)
+               {
+                   push(-1*convert);
+                   t=(treeNode)convert;
+               }
+               else
+               {
+
+               }
+            }
+        }
+    }
+}*/
+
+void LevelOrder(treeNode *t)
+{
+    if(t==NULL)
+    {
+        return;
+    }
+    else
+    {
+        while(isEmptyQueue() || t!=NULL)
+        {
+            if(t!=NULL)
+            {
+             cout<<t->data<<" "<<t->lChild->data<<" "<<t->rChild->data<<" ";
+             Enqueue(t->lChild);
+             Enqueue(t->rChild);
+            }
+            else
+            {
+                t=Dequeue();
+                cout<<t->lChild->data<<" "<<t->rChild->data<<" ";
+
             }
         }
     }
 }
 
-void PostOrder(Node *ptr)
-{
-    
-}*/
-
 int main()
 {
-    
-        //Creating New Node for instertion   
-               treeNode *temp =new treeNode;
-            //Inserting At Root Node;   
-               cout<<"Enter the Data For the Root :"<<endl;
-               cin>>temp->data;
-               temp->lChild=temp->rChild=NULL;
-               root=temp;
-               //temp=NULL;
-               Enqueue(root);
+    char ch;
+    while(true)
+    {   
+        cout<<"Do You wants to Enter the More in Tree  (y/n): ";
+        cin>>ch;
+        if(ch=='y')
+        {
+            if(root==NULL)
+            {
+                treeNode *t=new treeNode;
+                cout<<"Enter the Root Node :";
+                cin>>t->data;
+                t->lChild=t->rChild=NULL;
+                root=t;
+                Enqueue(t);
+            }
+            else
+            {
+                treeNode *temp = Dequeue();
+            
+                cout<<"Do You Wants to Enter the Data At the Left Side of "<<temp->data<<" (y/n)";
+                cin>>ch;
+            
+                if(ch=='y')
+                {
+                treeNode *node = new treeNode;
+                cout<<"Enter the Data For the Left Side : of("<<temp->data<<") ";
+                cin>>node->data;
+                node->lChild=node->rChild=NULL;
+                temp->lChild=node;
+                Enqueue(node);
+                }
 
-     while(true)
-    {
-       char ch;
-       cout<<"Do you wants to Enter More Data to Your Tree ?(y/n) ";
-       cin>>ch;
-       if(ch=='y')
-       {      
-           //Address Find from Queue
-              treeNode *ptr=Dequeue();
-           //Insertion at LeftChild     
-           cout<<"Do wants to enter the Data at Lchild of "<<ptr->data<<" (y/n) : ";
-           cin>>ch;
-           if(ch=='y')
-           {
-               temp=new treeNode;
-               cout<<"Enter the Data for LChild of "<<ptr->data<<" :";
-               cin>>temp->data;
-               ptr->lChild=temp;
-               Enqueue(ptr->lChild);
-               
-           }
-
-           //Insertion at RightChild
-           cout<<"Do wants to enter the Data at Rchild of "<<ptr->data<<" (y/n) : ";
-           cin>>ch;
-           if(ch=='y')
-           {
-               temp=new treeNode;
-               cout<<"Enter the Data for RChild of "<<ptr->data<<" :";
-               cin>>temp->data;
-               ptr->rChild=temp;
-               Enqueue(ptr->rChild);
-           }
-       }
-       else
-       {
-           cout<<"Your Tree is Completed !!"<<endl;
-           break;
-       }         
-    
+                cout<<"Do You Wants to Enter the Data At the Right Side of "<<temp->data<<" (y/n)";
+                cin>>ch;
+                
+                if(ch=='y')
+                {
+                    treeNode *node = new treeNode;
+                    cout<<"Enter the Right Side Data : of ( "<<temp->data<<") ";
+                    cin>>node->data;
+                    node->lChild=node->rChild=NULL;
+                    temp->rChild=node;
+                    Enqueue(node);
+                } 
+            }
+        }
+        else
+        {
+            break;
+        }
     }
+   
+    cout<<endl;
+      cout<<"PreOrder : ";
+      PreOrder(root); 
 
-    cout<<"PreOrder :"; 
-    PreOrder(root);
+      cout<<"InOrder : ";
+      InOrder(root);
+      
+      //cout<<" PostOrder : ";
+      //PostOrder(root);
+      
+      cout<<" LevelOrder : ";
+      LevelOrder(root);
 
 }
