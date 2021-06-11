@@ -76,6 +76,28 @@ void preorder(Node *ptr)
     }
 }
 
+void postorder(Node *ptr)
+{
+    if(ptr!=NULL)
+    {
+        postorder(ptr->lchild);
+        postorder(ptr->rchild);
+        cout<<ptr->data;
+    }
+}
+
+void inorder(Node *ptr)
+{
+    if(ptr!=NULL)
+    {
+        inorder(ptr->lchild);
+        cout<<ptr->data;
+        inorder(ptr->rchild);
+    }
+}
+
+
+
 void QDisplay()
 {
     Queue *ptr = first;
@@ -174,8 +196,34 @@ int main()
         break;
     }
   }
-
-  cout<<"PreOrder Of This Tree"<<endl;
-  preorder(root);
+   
+  cout<<"Choose the Order Which You Wants To See : "<<endl;
+  cout<<"1. Pre-Order\n2. Post-Order\n3. InOrder";
+  int cho;
+  cin>>cho;
+  switch (cho)
+  {
+  case 1:
+      {
+        cout<<"PreOrder Of This Tree"<<endl;
+        preorder(root);
+      }
+      break;
+  case 2:
+  {
+      cout<<"PostOrder of this tree"<<endl;
+      postorder(root);
+  }
+  break;
+  case 3:
+  {
+      cout<<"InOrder Of this tree"<<endl;
+      inorder(root);
+  }
+  default:
+      cout<<"Wrong Input"<<endl;
+      break;
+  } 
+  
   return 0;
 }
