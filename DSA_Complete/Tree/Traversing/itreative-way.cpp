@@ -143,7 +143,7 @@ void InOrder(treeNode *t)
     }
     else
     {
-        while(t!=NULL || isEmptyStack())
+        while(t!=NULL || isEmptyStack()!=true)
         {
             if(t!=NULL)
             {
@@ -203,19 +203,23 @@ void LevelOrder(treeNode *t)
     }
     else
     {
-        while(isEmptyQueue() || t!=NULL)
-        {
-            if(t!=NULL)
-            {
-             cout<<t->data<<" "<<t->lChild->data<<" "<<t->rChild->data<<" ";
-             Enqueue(t->lChild);
-             Enqueue(t->rChild);
-            }
-            else
-            {
-                t=Dequeue();
-                cout<<t->lChild->data<<" "<<t->rChild->data<<" ";
+        
+        cout<<t->data<<" ";
+        Enqueue(t);
 
+        while(isEmptyQueue()!=true)
+        {
+            t=Dequeue();
+            
+            if(t->lChild!=NULL)
+            {
+                cout<<t->lChild->data<<" ";
+                Enqueue(t->lChild);
+            }
+            if(t->rChild!=NULL)
+            {
+                cout<<t->rChild->data<<" ";
+                Enqueue(t->rChild);
             }
         }
     }
