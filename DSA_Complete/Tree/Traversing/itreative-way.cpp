@@ -225,6 +225,48 @@ void LevelOrder(treeNode *t)
     }
 }
 
+int CountNode(treeNode *t)
+{
+    int x,y;
+    if(t==NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        x=CountNode(t->lChild);
+        y=CountNode(t->rChild);
+        return x+y+1;
+    }
+}
+
+
+
+int CountNodeWhoseDeg2(treeNode *t)
+{
+    int x,y;
+
+    if(t==NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        x=CountNodeWhoseDeg2(t->lChild);
+        y=CountNodeWhoseDeg2(t->rChild);
+
+        if(t->lChild!=NULL && t->rChild!=NULL)
+        {
+            return x+y+1;
+        }
+        else
+        {
+            return x+y;
+        }
+        
+    }
+}
+
 int main()
 {
     char ch;
@@ -293,4 +335,8 @@ int main()
       cout<<" LevelOrder : ";
       LevelOrder(root);
 
+      cout<<"CountNode : "<< CountNode(root)<<endl;
+
+      //cout<<"CountNode1 : "<<  CountNode1(root)<<endl;
+      
 }
