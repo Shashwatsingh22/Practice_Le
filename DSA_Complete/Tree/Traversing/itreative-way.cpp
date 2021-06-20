@@ -267,6 +267,80 @@ int CountNodeWhoseDeg2(treeNode *t)
     }
 }
 
+int Deg1ANDDeg2(treeNode *t)
+{
+    int x,y;
+
+    if(t==NULL)
+    {
+        return 0;
+    }
+    
+    else
+    {
+      x=Deg1ANDDeg2(t->lChild);
+      y=Deg1ANDDeg2(t->rChild);
+
+      if(t->lChild!=NULL || t->rChild!=NULL)
+      {
+          return x+y+1;
+      }
+      else
+      {
+          return x+y;
+      }
+    }
+}
+
+int Deg0(treeNode *t)
+{
+    int x,y;
+
+    if(t==NULL)
+    {
+        return 0;
+    }
+    
+    else
+    {
+      x=Deg0(t->lChild);
+      y=Deg0(t->rChild);
+
+      if(t->lChild==NULL && t->rChild==NULL)
+      {
+          return x+y+1;
+      }
+      else
+      {
+          return x+y;
+      }
+    }
+}
+
+int Deg1(treeNode *t)
+{
+   int x,y;
+    if(t==NULL)
+    {
+        return 0;
+    }
+    
+    else
+    {
+      x=Deg1(t->lChild);
+      y=Deg1(t->rChild);
+
+      if((t->lChild!=NULL && t->rChild==NULL) || (t->lChild==NULL && t->rChild!=NULL))
+      {
+          return x+y+1;
+      }
+      else
+      {
+          return x+y;
+      }
+    }
+}
+
 int main()
 {
     char ch;
@@ -336,7 +410,11 @@ int main()
       LevelOrder(root);
 
       cout<<"CountNode : "<< CountNode(root)<<endl;
-
+       
+      cout<<"Deg2 : "<<CountNodeWhoseDeg2(root)<<endl;
+      cout<<"Deg1 : "<<Deg1(root)<<endl;
+      cout<<"Deg1&&Deg2 : "<<Deg1ANDDeg2(root)<<endl;
+      cout<<"Deg0 : "<<Deg0(root)<<endl; 
       //cout<<"CountNode1 : "<<  CountNode1(root)<<endl;
       
 }
