@@ -106,7 +106,7 @@ Node *Search(int key)
     }
 }
 
-Node *InPre(Node *ptr)
+Node *InPred(Node *ptr)
 {
     while(ptr!=NULL && ptr->rchild!=NULL)
     {
@@ -163,13 +163,13 @@ Node *Delete(Node *ptr,int key)
 
        if(Height(ptr->lchild) > Height(ptr->rchild))  
        {
-           Node *var=InorderPred(ptr->lchild)
+           Node *var=InPred(ptr->lchild);
            ptr->data=var->data;
            ptr->lchild=Delete(ptr->lchild,var->data);
        }
        else
        {
-           Node *var=InorderSucc(ptr->rchild);
+           Node *var=InSucc(ptr->rchild);
            ptr->data=var->data;
            ptr->rchild=Delete(ptr->rchild,var->data);
        }
@@ -179,7 +179,43 @@ Node *Delete(Node *ptr,int key)
 
 }
 
+void Inorder(Node *ptr)
+{
+    if(ptr==NULL)
+    {
+        return;
+    }
+    else
+    {
+        Inorder(ptr->lchild);
+        cout<<ptr->data<<" ";
+        Inorder(ptr->rchild);
+    }
+    return;
+}
+
 int main()
 {
+   int A[]={30,20,10,15,25,40,50,45};
+   for(int i=0; i < sizeof(A)/sizeof(A[0]); i++)
+   {
+       CreationOfTree(A[i]);
+   }
+   cout<< " Height " << Height(root)<<endl;
+   Node *ptr=Search(50);
+   cout << "Search =>  Address->" << ptr << "  Value->" <<ptr->data<<endl;
+   cout<< "Inorder => ";
+   Inorder(root);
+   cout<<endl;
+   
+   cout<< "Deletion of 50 => " << Delete(root,50) << endl;
+   cout<<"Inorder => ";
+   Inorder(root);
+   cout<<endl;
 
-}
+
+   cout<<" Printing the 40 Kaa InPred :-> ";
+   Node *adOf40=Search(40);
+   Node *temp=InSucc(adOf40);
+   cout<< " InPred of 40 => "<< temp->data <<endl;
+} 
