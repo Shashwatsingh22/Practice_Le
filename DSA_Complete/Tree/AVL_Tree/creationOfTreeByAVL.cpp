@@ -162,6 +162,7 @@ Node *recInsert(Node *ptr,int key)
         cout<<"RRRotation "<<key<<endl;
         return RRRotation(ptr);
     }
+    
     return ptr;
 }
 
@@ -178,12 +179,13 @@ void InOrder(Node *ptr)
 
 int main()
 {
-   root=recInsert(root,4);
-   recInsert(root,8);
-   recInsert(root,6);
+   root=recInsert(root,10);
+   recInsert(root,20);
+   recInsert(root,30);
+   recInsert(root,25);
+   recInsert(root,28);
+   recInsert(root,27);
    recInsert(root,5);
-   recInsert(root,7);
-   //recInsert(root,15);
 
    InOrder(root);
 
