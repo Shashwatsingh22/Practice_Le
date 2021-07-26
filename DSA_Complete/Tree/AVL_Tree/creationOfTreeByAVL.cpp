@@ -92,6 +92,32 @@ Node *LRRotation(Node *p)
     return plr;
 }
 
+Node *RLRotation(Node *p)
+{
+  Node *pr=p->rchild;
+  Node *prl=pr->lchild;
+  
+  Node *prlR=prl->rchild;
+  Node *prlL=prl->lchild;
+
+  prl->lchild=p;
+  prl->rchild=pr;
+  
+  pr->lchild=prlR;
+  p->rchild=prlL;
+
+  pr->height=NodeHeight(pr);
+  p->height=NodeHeight(p);
+  prl->height=NodeHeight(prl);
+
+  if(p==root)
+  {
+      root=prl;
+  }
+
+  return prl;
+}
+
 Node *recInsert(Node *ptr,int key)
 {
     Node *temp=NULL;
@@ -128,8 +154,8 @@ Node *recInsert(Node *ptr,int key)
     }
     else if(BalanceFactor(ptr)==-2 && BalanceFactor(ptr->rchild)==1)
     {
-        cout<<"LLRoatation "<<key<<endl;
-        //return RLRotation(ptr);
+        cout<<"RLRoatation "<<key<<endl;
+        return RLRotation(ptr);
     }
     else if(BalanceFactor(ptr)== -2 && BalanceFactor(ptr->rchild)==-1)
     {
@@ -152,10 +178,10 @@ void InOrder(Node *ptr)
 
 int main()
 {
-   root=recInsert(root,10);
-   recInsert(root,5);
+   root=recInsert(root,4);
    recInsert(root,8);
-   recInsert(root,9);
+   recInsert(root,6);
+   recInsert(root,5);
    recInsert(root,7);
    //recInsert(root,15);
 
