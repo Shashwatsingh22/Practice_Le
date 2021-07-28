@@ -32,7 +32,11 @@ Node *LLRotation(Node *p)
 {
     Node *pl=p->lchild;
     Node *plr=pl->rchild;
-    cout<<p->data<<" "<<pl->data<<" "<<plr->data<<endl;
+    //cout<<p->data<<" "<<pl->data<<" "<<plr->data<<endl;
+     if(plr==NULL)
+     {
+         cout<<"NULL"<<endl;
+     }
 
     pl->rchild=p;
     p->lchild=plr;
@@ -162,7 +166,7 @@ Node *recInsert(Node *ptr,int key)
         cout<<"RRRotation "<<key<<endl;
         return RRRotation(ptr);
     }
-    
+
     return ptr;
 }
 
@@ -185,7 +189,7 @@ int main()
    recInsert(root,25);
    recInsert(root,28);
    recInsert(root,27);
-   recInsert(root,5);
+   recInsert(root,5); //Error
 
    InOrder(root);
 
