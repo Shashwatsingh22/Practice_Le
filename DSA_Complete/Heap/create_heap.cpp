@@ -66,7 +66,8 @@ int main()
       Delete(A,n--);
       j--;
     } 
-
+     
+     cout<<"Sorted Array : ";
     for(int i=1;i<=7;i++)
     {
         cout<<A[i]<<" ";
