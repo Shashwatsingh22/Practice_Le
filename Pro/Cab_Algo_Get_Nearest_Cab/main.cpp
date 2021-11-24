@@ -41,7 +41,10 @@ int main()
     {
         char name;
         int x,y;
-        cin>>name>>x>>y;
+        cout<<"Car Name: ";
+        cin>>name;
+        cout<<"X axis and Y axis";
+        cin>>x>>y;
         car temp(name,x,y);
         v.push_back(temp);
     }

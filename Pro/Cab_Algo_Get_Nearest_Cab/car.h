@@ -27,6 +27,6 @@ class car{
 
     int distance(int userX,int userY)
     {
-       return (posX*posX-userX*userX)+(posY*posY-userY*userY);
+       return (posX-userX)*(posX-userX)+(posY-userY)*(posY-userY);
     }
 };
