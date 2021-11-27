@@ -11,7 +11,7 @@ void BFS(int Graph[][5],int vertex)
        int ver = dequeue(Q);
        for(int i=1;i<5;i++)
        {
-           if(Graph[ver][i]==1 && visited[Graph[ver][i]]!=0)
+           if(Graph[ver][i]==1 && visited[i]!=0)
            {
                cout<<i<<" ";
                enqueue(Q,i);
