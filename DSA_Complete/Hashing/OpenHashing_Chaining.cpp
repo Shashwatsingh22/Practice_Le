@@ -12,7 +12,7 @@ int hashFunction(int key)
 void hashInsert(Node *head[],int key)
 {
     int Index = hashFunction(key);
-    insert(key,&head[index]);
+    insert(key,&head[Index]);
 }
 
 void hashSearch(Node *head[],int key)
