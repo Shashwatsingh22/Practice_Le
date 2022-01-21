@@ -1,38 +1,26 @@
- int lheight(Node *ptr)
-    {
-        if(!ptr) return 0;
-        
-        else 
-        {
-            return lheight(ptr->left)+1;
-        }
-    }
+int height(TreeNode *ptr)
+ {
+    if(!ptr)  return 0;
     
-    int rheight(Node *ptr)
-    {
-        if(!ptr) return 0;
-        
-        else 
-        {
-            return rheight(ptr->right);
-        }
-    }
+     return 1+max(height(ptr->left),height(ptr->right));
+ }
     
-    int diameter(Node* root) {
-        // Your code here
-        
+    
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+              
        int Max = INT_MIN;
        int sum=0;
-       Node *ptr=root;
+       TreeNode *ptr=root;
        
-       stack <Node*> st;
+       stack <TreeNode*> st;
        
        while(ptr ||  !st.empty())
        {
            if(ptr)
            {
-               sum=rheight(ptr)+lheight(ptr)-1;
-               cout<<ptr->data<<" "<<sum<<endl;
+               sum=height(ptr->left)+height(ptr->right);
+               //cout<<ptr->val<<" "<<sum<<endl;
                Max=max(Max,sum);
                
                st.push(ptr);
@@ -47,5 +35,6 @@
            }
        }
        
-       return Max;
+       return Max;    
+    
     }
