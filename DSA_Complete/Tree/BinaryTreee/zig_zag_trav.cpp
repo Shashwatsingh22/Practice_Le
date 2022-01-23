@@ -1,227 +1,62 @@
-// { Driver Code Starts
-//Initial Template for C++
-
-
-#include <bits/stdc++.h>
-using namespace std;
-#define MAX_HEIGHT 100000
-
-// Tree Node
-struct Node {
-    int data;
-    Node* left;
-    Node* right;
-};
-
-// Utility function to create a new Tree Node
-Node* newNode(int val) {
-    Node* temp = new Node;
-    temp->data = val;
-    temp->left = NULL;
-    temp->right = NULL;
-
-    return temp;
-}
-
-
-// Function to Build Tree
-Node* buildTree(string str) {
-    // Corner Case
-    if (str.length() == 0 || str[0] == 'N') return NULL;
-
-    // Creating vector of strings from input
-    // string after spliting by space
-    vector<string> ip;
-
-    istringstream iss(str);
-    for (string str; iss >> str;) ip.push_back(str);
-
-    // Create the root of the tree
-    Node* root = newNode(stoi(ip[0]));
-
-    // Push the root to the queue
-    queue<Node*> queue;
-    queue.push(root);
-
-    // Starting from the second element
-    int i = 1;
-    while (!queue.empty() && i < ip.size()) {
-
-        // Get and remove the front of the queue
-        Node* currNode = queue.front();
-        queue.pop();
-
-        // Get the current node's value from the string
-        string currVal = ip[i];
-
-        // If the left child is not null
-        if (currVal != "N") {
-
-            // Create the left child for the current node
-            currNode->left = newNode(stoi(currVal));
-
-            // Push it to the queue
-            queue.push(currNode->left);
-        }
-
-        // For the right child
-        i++;
-        if (i >= ip.size()) break;
-        currVal = ip[i];
-
-        // If the right child is not null
-        if (currVal != "N") {
-
-            // Create the right child for the current node
-            currNode->right = newNode(stoi(currVal));
-
-            // Push it to the queue
-            queue.push(currNode->right);
-        }
-        i++;
-    }
-
-    return root;
-}
-
-
- // } Driver Code Ends
-//User function Template for C++
-/*Structure of the node of the binary tree is as
-struct Node {
-    int data;
-    Node *left;
-    Node *right;
-
-    Node(int val) {
-        data = val;
-        left = right = NULL;
-    }
-};
-*/
-
-class Solution{
-    public:
-    //Function to store the zig zag order traversal of tree in a list.
-    vector <int> zigZagTraversal(Node* root)
-    {
-        int temp=1;
-        //When temp==1 then pop from front.
-        //when temp==0 then pop from back.
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+         int temp=1;
+        //When temp==1 then reverse.
+        //when temp==0 no reverse.
         
-        deque<Node*> dq;
-        vector<int> v;
+        queue<TreeNode*> q;
+        vector<vector<int>> v;
+        vector<int> t;
         
         if(!root) return v;
         
-        
-        v.push_back(root->data);
-        dq.push_front(root);
+        t.push_back(root->val);
+        v.push_back(t);
+        t.clear();
+        q.push(root);
         
         while(true)
         {
-           int Size=dq.size();
            
-           cout<<"Main "<<Size<<endl<<endl;
+           int Size=q.size();
+           TreeNode *ptr=NULL;
            
            if(Size==0) return v;
            
-           while(Size>0  && temp==1)
+           while(Size>0)
            {
-               cout<<"1st While "<<temp<<" => "<<Size<<endl;
               
-                 Node* ptr=dq.back();
-                 dq.pop_back();
-                 if(ptr->right)
-                 {
-                     cout<<ptr->right->data<<" ";
-                     v.push_back(ptr->right->data);
-                     dq.push_front(ptr->right);
-                 }
-                 if(ptr->left)
-                 {
-                     cout<<ptr->left->data<<" ";
-                     v.push_back(ptr->left->data);
-                     dq.push_front(ptr->left);
-                 }
-                 Size--;
-                 
-                 if(Size==0) 
-                 {
-                     temp=0;
-                     cout<<endl;
-                 }
-             }
-        while(Size>0 && temp==0)
-             {
-                 cout<<"2nd While "<<temp<<" => "<<Size<<endl;
+              ptr=q.front();
+              q.pop();
+              
+              if(ptr->left)
+              {
+                  t.push_back(ptr->left->val);
+                  q.push(ptr->left);
+              }
                
-                 Node* ptr=dq.front();
-                 dq.pop_front();
-                 if(ptr->left)
-                 {
-                     cout<<ptr->left->data<<" ";
-                     v.push_back(ptr->left->data);
-                     dq.push_back(ptr->left);
-                 }
-                 if(ptr->right)
-                 {
-                     cout<<ptr->right->data<<" ";
-                     v.push_back(ptr->right->data);
-                     dq.push_front(ptr->right);
-                 }
-                 Size--;
-                 
-                 if(Size==0) 
-                 {
-                     temp=1;
-                     cout<<endl;
-                 }
-                     
-                 }
-             
-             
-             for(auto A:v)
-             {
-                 cout<<A<<" ";
-             }
-             cout<<endl<<endl;
-             cout<<"-----------------"<<endl;
+              if(ptr->right)
+              {
+                  t.push_back(ptr->right->val);
+                  q.push(ptr->right);
+              }
+Size--;
            }
-             
+           
+           if(temp==1 && !t.empty())
+           {
+               reverse(t.begin(),t.end());
+               temp=0;
+           }
+else
+{
+temp=1;}
+         if(!t.empty())
+         {
+           v.push_back(t);
+           t.clear();
+         }
+        }
     
         return v;
-    	// Code here
+    
     }
-};
-
-// { Driver Code Starts.
-
-/* Driver program to test size function*/
-
-  
-
-int main() {
-
-   
-    int t;
-    scanf("%d ", &t);
-    while (t--) {
-        string s, ch;
-        getline(cin, s);
-        
-        Node* root = buildTree(s);
-
-        vector<int> ans;
-        Solution ob;
-        ans = ob.zigZagTraversal(root) ;
-
-        for (int i = 0; i < ans.size(); i++)
-            cout << ans[i] << " ";
-
-        cout << endl;
-     
-    }
-    return 0;
-}
-  // } Driver Code Ends
