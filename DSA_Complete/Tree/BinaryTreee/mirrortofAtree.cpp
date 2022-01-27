@@ -39,3 +39,31 @@ void mirror(Node* node) {
             }
             
         }
+
+        ///LeetCode
+
+
+        class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        
+        if(!root) return root;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while(!q.empty())
+        {
+            TreeNode* ptr = q.front();
+            q.pop();
+            
+            if(ptr->left && !ptr->right || !ptr->left && ptr->right || ptr->left && ptr->right)
+            {
+                swap(ptr->left,ptr->right);
+            }
+            if(ptr->left) q.push(ptr->left);
+            if(ptr->right) q.push(ptr->right);
+     }
+        return root;
+    }
+};
