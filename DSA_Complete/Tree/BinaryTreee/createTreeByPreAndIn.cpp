@@ -1,39 +1,40 @@
-class Solution {
+class Solution{
     private:
-    int preOrdInd=0;
+    int preInd=0;
+    int size=0;
     
-    TreeNode* createTree(vector<int> &p,vector<int> &q,int inOrdStInd, int inOrdEndInd)
+    Node* soln(int stIn, int lIn,int in[],int pre[])
     {
-        if(inOrdStInd>inOrdEndInd) return NULL;
-        
-        TreeNode* ptr = new TreeNode(p[preOrdInd]);
-        preOrdInd++;
-        
-        int part=0;
-        
-        for(int i=0;i<q.size();i++)
-        {
-            if(ptr->val==q[i])
-            {
+      if(stIn>lIn) return NULL;
+      
+      Node* ptr=new Node(pre[preInd]);
+      preInd++;
+      
+      int part=0;
+      for(int i=stIn;i<=lIn;i++)
+      {
+          if(ptr->data==in[i]) 
+          {
               part=i;
-                break;
-            }
-        }
-        
-        ptr->left=createTree(p,q,inOrdStInd,part-1);
-        ptr->right=createTree(p,q,part+1,inOrdEndInd);
-        
-        return ptr;
+              break;
+          }
+      }
+      ptr->left=soln(stIn,part-1,in,pre);
+      ptr->right=soln(part+1,lIn,in,pre);
+      
+      return ptr;
     }
-public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        
-        if(preorder.size()==1 && inorder.size()==1 && preorder==inorder)
+    
+    
+    public:
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        if(n==1)
         {
-            TreeNode* root = new TreeNode(inorder[0]);
-            return root;
+            return new Node(in[0]);
         }
         
-       return createTree(preorder,inorder,0,inorder.size()-1);
+        size=n;
+        return soln(0,n-1,in,pre);
     }
 };
