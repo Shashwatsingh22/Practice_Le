@@ -27,3 +27,27 @@ class Solution {
         toSumTree(node->right);
     }
 };
+/////////////
+
+class Solution {
+  public:
+  
+    int solve(Node* node)
+    {
+        if(!node) return 0;
+        int left=solve(node->left);
+        int right=solve(node->right);
+        int curr=node->data;
+        node->data=left+right;
+        return curr+left+right;
+        
+    }
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    void toSumTree(Node *node)
+    {
+        if(!node || !node->left && !node->right) return;
+        solve(node);
+        
+    }
+};
