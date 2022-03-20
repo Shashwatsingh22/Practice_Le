@@ -38,3 +38,41 @@ class Solution{
         return soln(0,n-1,in,pre);
     }
 };
+
+
+///////////////////
+class Solution{
+    
+    private:
+    
+    
+    int preInd=0;
+    map<int,int> hash;
+    
+    Node* createTree(int pre[],int inSt,int inEnd)
+    {
+        if(inSt > inEnd) return NULL;
+        
+        Node* root = new Node(pre[preInd++]);
+        
+       
+        int rootAddIn=hash[root->data];
+        
+        
+        root->left=createTree(pre,inSt,rootAddIn-1);
+        
+        root->right=createTree(pre,rootAddIn+1,inEnd);
+        
+        return root;
+    }
+    public:
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        
+        for(int i=0;i<n;i++) hash[in[i]]=i;
+        
+        //createTree(pre, preInd, inHash , inSt , inEnd)
+        
+        return createTree(pre,0,n-1);
+    }
+};
