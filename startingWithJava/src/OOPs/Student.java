@@ -10,6 +10,7 @@ class Student
     //Methods Behaviours
     public Student()
     {
+        this(11,"Rohit","Harayana");
         stdID = 0;
         stdName = "";
         stdCity = "";
@@ -22,6 +23,7 @@ class Student
 
     public  Student(int stdID, String stdName, String stdCity)
     {
+        System.out.println("Hello");
         this.stdID=stdID;
         this.stdName=stdName;
         this.stdCity=stdCity;
